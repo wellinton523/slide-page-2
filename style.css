@@ -662,3 +662,46 @@ h2 {
         font-size: 0.85rem;
     }
 }
+
+/* style.css */
+
+/* ... (resto do arquivo anterior) ... */
+
+/* Prepara o elemento pai para ter um filho absoluto */
+.blur {
+    position: relative;
+    display: inline-block; /* Ou block, dependendo do layout */
+    overflow: hidden; /* Garante que o blur não saia das bordas arredondadas */
+    cursor: pointer;
+    justify-self: center;
+}
+
+/* Cria o overlay borrado */
+.blur::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Aplica o desfoque de fundo */
+    backdrop-filter: blur(80px);
+    -webkit-backdrop-filter: blur(80px); /* Suporte para Safari */
+    
+    /* Adiciona uma cor leve para ajudar a esconder o texto */
+    background-color: rgba(3, 0, 48, 0.979);
+    
+    /* Transição suave da opacidade */
+    transition: opacity 0.3s ease;
+    opacity: 1;
+    
+    /* Garante que o overlay fique sobre o texto */
+    z-index: 1;
+}
+
+/* Esconde o overlay ao passar o mouse */
+.blur:hover::after {
+    opacity: 0;
+    pointer-events: none; /* Permite clicar no texto por baixo se necessário */
+}
